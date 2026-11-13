@@ -12,7 +12,7 @@ The solver's linear formula is derived with [Macaulay2](https://macaulay2.com/) 
 
 To use the V-Umlaut solver inside [PoseLib](https://github.com/PoseLib/PoseLib)'s RANSAC
 pipeline, as a drop-in minimal fundamental matrix solver or for calibrated relative pose
-(optionally with early non-minimal refinement, ENM),
+(optionally with early non-minimal refitting, ENM),
 [see the v-umlaut branch in our PoseLib fork](https://github.com/CIVA-Lab/PoseLib/tree/v-umlaut).
 
 Our real-data experiments in the paper follow the evaluation pipeline of this
@@ -89,5 +89,29 @@ to move along the x-axis of Figure 4. The three methods are printed as `PoseLib-
     month     = {June},
     year      = {2026},
     pages     = {21464-21473}
+}
+```
+
+If you cite our paper, please consider also citing:
+- [PLMP – Point-Line Minimal Problems for Projective SfM](https://openaccess.thecvf.com/content/ICCV2025/html/Kiehn_PLMP_-_Point-Line_Minimal_Problems_for_Projective_SfM_ICCV_2025_paper.html) (ICCV 2025), whose Table 1 lists the V-Umlaut configuration and classifies it as a degree-1 minimal problem.
+- [Practical Solutions to the Relative Pose of Three Calibrated Cameras](https://openaccess.thecvf.com/content/CVPR2025/html/Tzamos_Practical_Solutions_to_the_Relative_Pose_of_Three_Calibrated_Cameras_CVPR_2025_paper.html) (CVPR 2025), whose evaluation pipeline our real-data experiments use.
+
+```bibtex
+@InProceedings{Kiehn_2025_ICCV,
+    author    = {Kiehn, Kim and Ahlb\"ack, Albin and Kohn, Kathl\'en},
+    title     = {PLMP - Point-Line Minimal Problems for Projective SfM},
+    booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+    month     = {October},
+    year      = {2025},
+    pages     = {8558-8567}
+}
+
+@InProceedings{Tzamos_2025_CVPR,
+    author    = {Tzamos, Charalambos and Kocur, Viktor and Ding, Yaqing and Barath, Daniel and Haladova, Zuzana Berger and Sattler, Torsten and Kukelova, Zuzana},
+    title     = {Practical Solutions to the Relative Pose of Three Calibrated Cameras},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2025},
+    pages     = {21913-21923}
 }
 ```
