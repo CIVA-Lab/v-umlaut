@@ -10,15 +10,17 @@ The solver's linear formula is derived with [Macaulay2](https://macaulay2.com/) 
 [`derivation/v_umlaut.m2`](derivation/v_umlaut.m2), and implemented in
 [`Solver.cpp`](Solver.cpp).
 
-To use the V-Umlaut solver as a drop-in minimal fundamental matrix solver inside
-[PoseLib](https://github.com/PoseLib/PoseLib)'s RANSAC pipeline,
+To use the V-Umlaut solver inside [PoseLib](https://github.com/PoseLib/PoseLib)'s RANSAC
+pipeline, as a drop-in minimal fundamental matrix solver or for calibrated relative pose
+(optionally with early non-minimal refinement, ENM),
 [see the v-umlaut branch in our PoseLib fork](https://github.com/CIVA-Lab/PoseLib/tree/v-umlaut).
 
 Our real-data experiments in the paper follow the evaluation pipeline of this
 [repository](https://github.com/kocurvik/threeview) for the paper
 [Practical Solutions to the Relative Pose of Three Calibrated Cameras](https://openaccess.thecvf.com/content/CVPR2025/papers/Tzamos_Practical_Solutions_to_the_Relative_Pose_of_Three_Calibrated_Cameras_CVPR_2025_paper.pdf)
-by Tzamos et al., CVPR 2025. We will share our fork of this pipeline that replicates the
-real-data experiment figures in our paper soon.
+by Tzamos et al., CVPR 2025. [Our fork of this pipeline](https://github.com/CIVA-Lab/threeview)
+reproduces the real-data figures of our paper (Figure 5 and supplementary Figure 6) for
+`5pF-V-Umlaut` and `5pF-V-Umlaut + ENM (5p)`.
 
 ## Synthetic Experiments
 
@@ -27,9 +29,6 @@ accuracy of `5pF-V-Umlaut` against the `5pE` (5-point essential) and `7pF` (7-po
 fundamental) solvers, under two pixel-noise models, on two camera/scene configurations,
 without RANSAC. The synthetic data generation and the two noise models are described in
 detail in **Section 4** of our paper.
-
-The plotting code that replicates Figure 4 will be shared soon. For now, the binary
-reproduces individual data points (below).
 
 ### Dependencies
 - A C++17 compiler and CMake ≥ 3.10
@@ -51,6 +50,18 @@ cmake -S . -B build -G "Visual Studio 17 2022" -A x64 -DEigen3_DIR=<prefix>/shar
 cmake --build build --config Release
 #   -> build/Release/v_umlaut.exe
 ```
+
+### Reproducing Figure 4
+After building, run (Python 3 with matplotlib):
+
+```bash
+python plot_figure4.py    # --binary <path> if the binary is not in build/
+```
+It runs the binary for every data point of Figure 4 (both scenes, both noise models,
+σ = 0 to 2 px, 10,000 trials each) in parallel, saves the median and interquartile range of
+the rotation and translation errors to `build/figure4.csv`, and draws the figure to
+`build/figure4.pdf` and `build/figure4.png`. Runs are not seeded, so the medians vary by a
+few percent between runs.
 
 ### Reproducing a Figure 4 data point
 Each run performs many trials and prints the median rotation/translation error for all
